@@ -40,3 +40,12 @@ Run containers:
 cd backend
 docker compose up
 ```
+
+# Cheatsheet
+
+## Backend
+
+Install dependencies
+```shell
+docker compose run --rm backend bundle install
+```
