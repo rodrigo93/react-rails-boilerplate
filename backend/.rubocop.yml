@@ -1,9 +1,16 @@
 require: rubocop-rails
 
+AllCops:
+  NewCops: enable
+
+
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
 
+# Styles
+Style/Documentation:
+  Enabled: false
 Style/BlockComments:
   Exclude:
     - spec/**/*
