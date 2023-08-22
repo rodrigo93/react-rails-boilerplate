@@ -1,0 +1,9 @@
+require: rubocop-rails
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Style/BlockComments:
+  Exclude:
+    - spec/**/*
