@@ -16,3 +16,27 @@ The React app is configured to use the following:
 - Jest
 
 Everything is configured to run with Docker and Docker Compose.
+
+# Setup
+
+All you need to do is build the images and run the containers.
+
+Build images:
+```shell
+cd backend
+docker compose build
+```
+
+Create databases:
+```shell
+cd backend
+docker compose run --rm backend bin/rails db:create
+docker compose run --rm backend bin/rails db:migrate
+docker compose run --rm backend bin/rails db:seed
+```
+
+Run containers:
+```shell
+cd backend
+docker compose up
+```
