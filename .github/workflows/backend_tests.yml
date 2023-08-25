@@ -36,4 +36,4 @@ jobs:
           bundle exec rails db:migrate
           bundle exec rails db:schema:load
       - name: Run Rspec
-        run: bundle exec rake test
+        run: bundle exec rspec
