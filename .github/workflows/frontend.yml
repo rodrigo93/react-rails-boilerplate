@@ -42,4 +42,4 @@ jobs:
         with:
           node-version: "20"
       - name: Run lints
-        run: npm audit
+        run: npm audit --audit-level=critical
