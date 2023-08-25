@@ -3,6 +3,22 @@ name: Backend
 on: [push]
 
 jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    env:
+      RAILS_ENV: test
+    steps:
+      - uses: actions/checkout@v3 # https://github.com/marketplace/actions/checkout
+      - uses: ruby/setup-ruby@v1  # https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+          working-directory: ./backend
+      - name: Run Rubocop Lints
+        run: bundle exec rubocop
   rspec:
     runs-on: ubuntu-latest
     defaults:
