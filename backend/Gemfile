@@ -9,7 +9,7 @@ ruby '3.2.2'
 gem 'rails', '~> 7.0.6'
 
 # Middleware that will make Rack-based apps CORS compatible.
-gem 'rack-cors', '~> 0.4'
+gem 'rack-cors', '~> 1.0'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
