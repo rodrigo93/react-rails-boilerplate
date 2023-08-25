@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  backend:
+    image: react-rails-boilerplate  # TODO: Specify your desired image name here
+    build:
+      context: ./backend # This is going to be the "root" of the build and it uses the Dockfile in it
+    env_file:
+      - ./backend/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+  frontend:
+    container_name: frontend
+    image: "node:20-alpine"
+    user: "node"
+    working_dir: /frontend
+    command: "npm start"
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./frontend:/frontend
+    depends_on:
+      - backend
+  postgres:
+    image: postgres:13
+    restart: always
+    env_file:
+      - ./backend/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+volumes:
+  postgres-data:
