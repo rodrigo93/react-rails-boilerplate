@@ -26,7 +26,6 @@ All you need to do is build the images and run the containers.
 
 Build images:
 ```shell
-cd backend
 docker compose build
 ```
 
@@ -40,7 +39,6 @@ docker compose run --rm backend bin/rails db:seed
 
 Run containers:
 ```shell
-cd backend
 docker compose up
 ```
 
