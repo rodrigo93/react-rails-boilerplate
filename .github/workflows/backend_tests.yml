@@ -33,6 +33,7 @@ jobs:
       - name: Migration
         run: |
           bundle exec rails db:create
-          bundle exec rake db:schema:load
+          bundle exec rails db:migrate
+          bundle exec rails db:schema:load
       - name: Run Rspec
         run: bundle exec rake test
