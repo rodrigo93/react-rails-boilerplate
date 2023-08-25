@@ -1,6 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 
+// TODO: Replace this with the correct URL for your API
+const API_URL = "http://localhost:3000/api/v1";
+
+// TODO: Update this function to call your API
+function getApiData() {
+    return axios.get(API_URL).then(response => response.data);
+}
+
 function App() {
   return (
     <div className="App">
