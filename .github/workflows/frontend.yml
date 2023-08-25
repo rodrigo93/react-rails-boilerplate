@@ -3,6 +3,20 @@ name: Frontend
 on: [push]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v3 # https://github.com/marketplace/actions/checkout
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm install
+      - name: Run lints
+        run: npm run lint
   jest:
     runs-on: ubuntu-latest
     defaults:
