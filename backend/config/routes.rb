@@ -5,4 +5,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  namespace :api do
+    namespace :v1 do
+      # TODO: Add your API routes here
+    end
+  end
 end

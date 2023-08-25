@@ -19,6 +19,9 @@ Everything is configured to run with Docker and Docker Compose.
 
 # Setup
 
+> **Before running any command, make sure to look for `TODO` comments and replace the values with your own.**
+> **Otherwise, the app will be created with the default values such as `react-rails-boilerplate`.**
+
 All you need to do is build the images and run the containers.
 
 Build images:
@@ -40,3 +43,10 @@ Run containers:
 cd backend
 docker compose up
 ```
+
+# Accessing the app
+
+The Rails API will be running on `localhost:3000` and the React app will be running on `localhost:3001`.
+
+- Rails API: http://localhost:3000
+- React app: http://localhost:3001
