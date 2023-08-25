@@ -1,0 +1,71 @@
+name: Backend
+
+on: [push]
+
+jobs:
+  vulnerability-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    env:
+      RAILS_ENV: test
+    steps:
+      - uses: actions/checkout@v3 # https://github.com/marketplace/actions/checkout
+      - uses: ruby/setup-ruby@v1  # https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+          working-directory: ./backend
+      - name: Run bundle-audit
+        run: bundle exec bundle-audit
+  rubocop:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    env:
+      RAILS_ENV: test
+    steps:
+      - uses: actions/checkout@v3 # https://github.com/marketplace/actions/checkout
+      - uses: ruby/setup-ruby@v1  # https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+          working-directory: ./backend
+      - name: Run Rubocop Lints
+        run: bundle exec rubocop
+  rspec:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      RAILS_ENV: test
+      RAILS_DATABASE_HOST: 127.0.0.1
+      RAILS_DATABASE_USER: postgres
+      RAILS_DATABASE_PASSWORD: password
+    steps:
+      - uses: actions/checkout@v3 # https://github.com/marketplace/actions/checkout
+      - uses: ruby/setup-ruby@v1  # https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+          working-directory: ./backend
+      - name: Migration
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+          bundle exec rails db:schema:load
+      - name: Run Rspec
+        run: bundle exec rspec
